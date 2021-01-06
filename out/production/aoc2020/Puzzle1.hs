@@ -9,12 +9,10 @@ puzzle1 :: IO()
 puzzle1 = do
        filePath <- getDataFileName "data/puzzle1-input.txt"
        contents <- readFile filePath
-       let ints = map readInt . words $ contents
-
+       let ints = map read' . words $ contents
 
        print [(x,y, x*y) | (x:ys) <- tails ints, y <- ys, x+y == 2020]
+       print [(x,y,z, x*y*z) | (x:ys) <- tails ints, y <- ys, z <- ys, x+y+z == 2020]
 
---       print [ (x,y, x*y) | x <- ints, y <- ints, x+y == 2020]
-
-readInt :: String -> Int
-readInt = read
+read' :: String -> Int
+read' = read
