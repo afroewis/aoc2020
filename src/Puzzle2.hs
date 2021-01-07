@@ -51,7 +51,7 @@ parsePasswordCheck s = do
               let x = runParser parser () "" s
               case x of
                 Left e  -> Nothing
-                Right y ->  Just y
+                Right y -> Just y
 
 runRule :: Maybe PasswordCheck -> (PasswordCheck -> Bool) -> Bool
 runRule check rule = maybe False rule check
