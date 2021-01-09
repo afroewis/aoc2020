@@ -2,6 +2,7 @@ module Main where
 
 import Puzzle1
 import Puzzle2
+import Puzzle3
 
 main :: IO ()
 main = do
@@ -9,3 +10,5 @@ main = do
   puzzle1
   print "Puzzle 2:"
   puzzle2
+  print "Puzzle 3:"
+  puzzle3
