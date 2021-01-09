@@ -11,9 +11,9 @@ replaceInput i [x] = [replaceCharAtIndex (normalizeX maxLength i) x]
 replaceInput i (x:xs) = replaceInput i [x] ++ replaceInput (i + 3) xs
 
 replaceCharAtIndex :: Int -> String -> String
-replaceCharAtIndex x str = strHead ++ [replacement] ++ tail strAfter
-  where (strHead, strAfter) = splitAt x str
-        replacement = if str !! x == '.' then 'O' else 'X'
+replaceCharAtIndex index str = strHead ++ [replacement] ++ tail strAfter
+  where (strHead, strAfter) = splitAt index str
+        replacement = if str !! index == '.' then 'O' else 'X'
 
 normalizeX :: Int -> Int -> Int
 normalizeX maxLength currentLength
