@@ -11,8 +11,8 @@ puzzle1 = do
        contents <- readFile filePath
        let ints = map read' . words $ contents
 
-       print [(x,y, x*y) | (x:ys) <- tails ints, y <- ys, x+y == 2020]
-       print [(x,y,z, x*y*z) | (x:ys) <- tails ints, y <- ys, z <- ys, x+y+z == 2020]
+       print $ head [(x,y, x*y) | (x:ys) <- tails ints, y <- ys, x+y == 2020]
+       print $ head [(x,y,z, x*y*z) | x <- ints, y<- ints, z <- ints, x+y+z == 2020]
 
 read' :: String -> Int
 read' = read
