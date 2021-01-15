@@ -38,8 +38,7 @@ hairColorParser = do _ <- char '#'
 
 passportIdParser :: Parser String
 passportIdParser = do
-                     id <- many1 digit
-                     return id
+                     many1 digit
 
 createPair :: String -> (String, String)
 createPair str = (key, value)
