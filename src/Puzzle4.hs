@@ -103,4 +103,4 @@ puzzle4 = do
        putStrLn $ "Total valid passports (Part 1): " ++ show (length validPassports)
 
        let validPassports2 = [p | p <- pairs, isValidPassport_2 p]
-       putStrLn $ "Total valid passports (Part 2)): " ++ show (length validPassports2)
+       putStrLn $ "Total valid passports (Part 2): " ++ show (length validPassports2)
