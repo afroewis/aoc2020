@@ -1,6 +1,7 @@
 module Puzzle5 (puzzle5) where
 
 import Paths_aoc2020
+import Data.List (sort)
 
 data Seat = Seat {row :: Int, column :: Int} deriving (Show)
 
@@ -10,6 +11,10 @@ parseBoardingPass str = Seat row column
           columnBytes = drop 7 str
           row = getRow rowBytes 0 127
           column = getColumn columnBytes 0 7
+
+findMissingSeatId :: [Int] -> Int -> Int
+findMissingSeatId seats 0 = findMissingSeatId seats (head seats - 1)
+findMissingSeatId (x:xs) last = if x /= last + 1 then last + 1 else findMissingSeatId xs x
 
 getRow :: String -> Int -> Int -> Int
 getRow [] min _ = min
@@ -35,7 +40,9 @@ puzzle5 = do
 
        let seatIds =  [row x * 8 + column x | x <- seats]
        putStrLn $ "Max seat ID: " ++ show (maximum seatIds)
-
+     
+       let missingBoardingPass = findMissingSeatId $ sort seatIds
+       putStrLn $ "Missing seat ID: " ++ show (missingBoardingPass 0)
 
 --       TO DO: Write unit tests with these test cases
 --       putStrLn $ "Row FBFBBFF: " ++ show (getRow "FBFBBFF" 0 127) ++ " Column RLR: " ++ show (getColumn "RLR" 0 7)
