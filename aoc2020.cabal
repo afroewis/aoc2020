@@ -25,6 +25,7 @@ library
       Puzzle2
       Puzzle3
       Puzzle4
+      Puzzle5
   other-modules:
       Paths_aoc2020
   hs-source-dirs:
