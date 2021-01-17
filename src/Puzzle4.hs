@@ -20,7 +20,6 @@ import Text.Parsec.String
 -- Country ID (cid)
 -------------------------
 data Height = Height {height :: Int, unit :: String} deriving (Show)
-data Passport = Passport {byr :: Int, iyr :: Int, year :: Int} deriving (Show)
 
 -- Parsing with Parsec
 int :: Parser Int
