@@ -5,6 +5,7 @@ import Puzzle2
 import Puzzle3
 import Puzzle4
 import Puzzle5
+import Puzzle6
 
 main :: IO ()
 main = do
@@ -22,3 +23,6 @@ main = do
 
   print "Puzzle 5:"
   puzzle5
+  
+  print "Puzzle 6:"
+  puzzle6
