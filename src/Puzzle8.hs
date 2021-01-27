@@ -12,13 +12,13 @@ data ProgramState = ProgramState {state_instr :: Int, state_val :: Int}
 data InstructionType = Jmp | Acc | Nop deriving (Eq, Show)
 
 execute :: [Instruction] -> [Int] -> Int -> Int -> Int
-execute instrs ranInstrs i acc = if length (filter (==i) ranInstrs') == 2
+execute instructions ranInstructions row acc = if length (filter (==row) ranInstructions) == 1
                                  then acc
-                                 else execute instrs ranInstrs' (state_instr newState) (state_val newState)
-   where newState = executeInstruction currInstr currState
-         currState = ProgramState i acc
-         currInstr = instrs !! i
-         ranInstrs' = ranInstrs ++ [i]
+                                 else execute instructions ranInstrs' (state_instr newState) (state_val newState)
+   where newState   = executeInstruction currInstr currState
+         currState  = ProgramState row acc
+         currInstr  = instructions !! row
+         ranInstrs' = ranInstructions ++ [row]
 
 executeInstruction :: Instruction -> ProgramState -> ProgramState
 executeInstruction instruction state = ProgramState nextInstr nextVal
