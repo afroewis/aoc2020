@@ -28,6 +28,7 @@ library
       Puzzle5
       Puzzle6
       Puzzle7
+      Puzzle8
   other-modules:
       Paths_aoc2020
   hs-source-dirs:
@@ -35,7 +36,8 @@ library
   build-depends:
       base >=4.7 && <5,
       parsec,
-      split
+      split,
+      text
 
   default-language: Haskell2010
 
@@ -50,7 +52,8 @@ executable aoc2020-exe
       aoc2020,
       base >=4.7 && <5,
       parsec,
-      split
+      split,
+      text
 
   default-language: Haskell2010
 
