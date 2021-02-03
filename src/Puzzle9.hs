@@ -10,9 +10,9 @@ puzzle9 = do
      filePath <- getDataFileName "data/puzzle9-input.txt"
      contents <- readFile filePath
      let fileLines = lines contents
-     let numbers = map readInt fileLines
-     let numbers2 = findIllegalNumbers numbers []
-     mapM_ print numbers2
+     let numbers = map read fileLines
+     let illegalNumbers = findIllegalNumbers numbers []
+     mapM_ print illegalNumbers
 
      -- Create unit tests
      let arr = [35, 20, 15, 25, 47]
@@ -32,7 +32,7 @@ puzzle9 = do
 
 
 findIllegalNumbers :: [Int] -> [Int] -> [Int]
-findIllegalNumbers numbers@(x:xs) results
+findIllegalNumbers numbers@(_:xs) results
   | length numbers < 26 = results
   | otherwise = results ++ findIllegalNumbers xs results'
   where
@@ -42,6 +42,3 @@ findIllegalNumbers numbers@(x:xs) results
 
 numberIsAllowed :: [Int] -> Int -> Bool
 numberIsAllowed preamble num = not (null ([(x,y) | x <- preamble, y <- preamble, x+y == num]))
-
-readInt :: String -> Int
-readInt str = read str
