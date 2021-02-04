@@ -13,10 +13,15 @@ puzzle9 = do
      let fileLines = lines contents
      let numbers = map read fileLines
      let illegalNumbers = findIllegalNumbers numbers []
-     mapM_ print illegalNumbers
+     putStrLn "Illegal number(s): "
+     print illegalNumbers
 
      let exploitNumbers = findWeakness numbers
-     print $ minimum exploitNumbers + maximum exploitNumbers
+     putStrLn "Security weakness: "
+     print exploitNumbers
+     let minExploit = minimum exploitNumbers
+     let maxExploit = maximum exploitNumbers
+     putStrLn $ "Exploit: Min (" ++ show minExploit ++ ") + Max (" ++ show maxExploit ++ ") = " ++ show (minExploit+maxExploit)
 
      -- Create unit tests
      let arr = [35, 20, 15, 25, 47]
