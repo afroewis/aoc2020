@@ -1,10 +1,7 @@
 module Puzzle9 (puzzle9) where
 
 import Paths_aoc2020
-import Data.Text.Read
-import Data.Text (pack)
-import Data.List ( tails, elemIndex)
-import Data.Maybe (fromJust)
+import Data.List ( elemIndex)
 
 puzzle9 :: IO()
 puzzle9 = do
@@ -16,7 +13,7 @@ puzzle9 = do
      putStrLn "Illegal number(s): "
      print illegalNumbers
 
-     let exploitNumbers = findWeakness numbers
+     let exploitNumbers = findWeakness numbers (head illegalNumbers)
      putStrLn "Security weakness: "
      print exploitNumbers
      let minExploit = minimum exploitNumbers
@@ -39,13 +36,13 @@ puzzle9 = do
      let arr5 = [95, 102, 117, 150, 182]
      print $ numberIsAllowed arr5 127 -- Expected to be false
 
-findWeakness :: [Int] -> [Int]
-findWeakness [] = []
-findWeakness numbers@(_:xs) = case idx of
+findWeakness :: [Int] -> Int -> [Int]
+findWeakness [] _ = []
+findWeakness numbers@(_:xs) needle = case idx of
                                 Just i -> take (i - 1) numbers
-                                Nothing -> findWeakness xs
-    where foo = scanl1 (+) numbers
-          idx = elemIndex 2089807806 foo
+                                Nothing -> findWeakness xs needle
+    where scan = scanl1 (+) numbers
+          idx = elemIndex needle scan
 
 findIllegalNumbers :: [Int] -> [Int] -> [Int]
 findIllegalNumbers numbers@(_:xs) results
