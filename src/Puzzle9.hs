@@ -3,7 +3,8 @@ module Puzzle9 (puzzle9) where
 import Paths_aoc2020
 import Data.Text.Read
 import Data.Text (pack)
-import Data.List (tails)
+import Data.List ( tails, elemIndex)
+import Data.Maybe (fromJust)
 
 puzzle9 :: IO()
 puzzle9 = do
@@ -13,6 +14,9 @@ puzzle9 = do
      let numbers = map read fileLines
      let illegalNumbers = findIllegalNumbers numbers []
      mapM_ print illegalNumbers
+
+     let exploitNumbers = findWeakness numbers
+     print $ minimum exploitNumbers + maximum exploitNumbers
 
      -- Create unit tests
      let arr = [35, 20, 15, 25, 47]
@@ -30,6 +34,13 @@ puzzle9 = do
      let arr5 = [95, 102, 117, 150, 182]
      print $ numberIsAllowed arr5 127 -- Expected to be false
 
+findWeakness :: [Int] -> [Int]
+findWeakness [] = []
+findWeakness numbers@(_:xs) = case idx of
+                                Just i -> take (i - 1) numbers
+                                Nothing -> findWeakness xs
+    where foo = scanl1 (+) numbers
+          idx = elemIndex 2089807806 foo
 
 findIllegalNumbers :: [Int] -> [Int] -> [Int]
 findIllegalNumbers numbers@(_:xs) results
