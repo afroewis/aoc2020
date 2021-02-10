@@ -13,7 +13,7 @@ puzzle6 = do
 
        -- Part 1
        let uniqueAnswersPerGroup = map (nub . concat) answersPerGroup
-       let score = foldl (\acc x -> acc + length x) 0 uniqueAnswersPerGroup
+       let score = foldr ((+) . length) 0 uniqueAnswersPerGroup
        putStrLn $ "Number of answers: " ++ show score
 
        -- Part 2
