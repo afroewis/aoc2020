@@ -25,10 +25,10 @@ parser = do minOcc <- int
 data PasswordCheck = PasswordCheck Int Int Char String deriving Show
 
 rule1 :: PasswordCheck -> Bool
-rule1 (PasswordCheck minOcc maxOcc c subject)
-  | occ >= minOcc && occ <= maxOcc = True
+rule1 (PasswordCheck minOccurences maxOccurence c subject)
+  | occurences >= minOccurences && occurences <= maxOccurence = True
   | otherwise = False
-  where occ = length $ filter (==c) subject
+  where occurences = length $ filter (==c) subject
 
 rule2 :: PasswordCheck -> Bool
 rule2 (PasswordCheck firstIndex secondIndex c subject)
@@ -50,7 +50,7 @@ parsePasswordCheck :: String -> Maybe PasswordCheck
 parsePasswordCheck s = do
               let x = runParser parser () "" s
               case x of
-                Left e  -> Nothing
+                Left e  -> error $ show e
                 Right y -> Just y
 
 runRule :: Maybe PasswordCheck -> (PasswordCheck -> Bool) -> Bool
